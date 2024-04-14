@@ -1,5 +1,6 @@
 import express from "express";
 import {
+    addComment,
     createBlog,
     deleteBlog,
     getBlogDetails,
@@ -15,5 +16,6 @@ router.get("/get-blogs", getBlogs);
 router.get("/get-blog-details", getBlogDetails);
 router.post("/update-blog", verify, updateBlog);
 router.post("/delete-blog", verify, deleteBlog);
+router.post("/add-comment", verify, addComment);
 
 export default router;

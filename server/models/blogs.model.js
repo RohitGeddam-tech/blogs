@@ -6,7 +6,7 @@ const BlogsSchema = mongoose.Schema({
   author: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
   date: { type: Date, default: new Date() },
   tags: [String],
-  category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
+  category: { type: String, ref: "Category" },
   image: String,
   comments: [
     {

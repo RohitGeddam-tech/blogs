@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
 import Blogs from "../models/blogs.model.js";
 
-// Create
+// Create New Blog
 export const createBlog = async (req, res) => {
   const body = req.body;
-
-  console.log(body);
 
   if (!req.userId) return res.status(404).json({ message: "Unauthorized!" });
   const newBody = new Blogs({
@@ -22,10 +20,23 @@ export const createBlog = async (req, res) => {
   }
 };
 
-// Get
+// Get All Blogs
 export const getBlogs = async (req, res) => {
+  const { category, title } = req.query;
+
+  let filter = {};
+  if (category) {
+    filter.category = category;
+  }
+  if (title) {
+    filter.title = { $regex: new RegExp(title, "i") }; // Case-insensitive title search
+  }
+
   try {
-    const blogs = await Blogs.find().populate('author', 'name').populate('comments.author', 'name');
+    const blogs = await Blogs.find(filter)
+      .sort({ _id: -1 })
+      .populate("author", "name")
+      .populate("comments.author", "name");
 
     res.status(200).json({
       success: true,
@@ -34,4 +45,55 @@ export const getBlogs = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
+};
+
+// Get Single Blog
+export const getBlogDetails = async (req, res) => {
+  const { id } = req.body;
+
+  try {
+    const blog = await Blogs.find(id)
+      .populate("author", "name")
+      .populate("comments.author", "name");
+
+    res.status(200).json({
+      success: true,
+      data: blog,
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+// Update Blog
+export const updateBlog = async (req, res) => {
+  const blog = req.body;
+
+  if (!req.userId) return res.status(404).json({ message: "Unauthorized!" });
+
+  if (!mongoose.Types.ObjectId.isValid(blog._id))
+    return res.status(404).send("No blog with that id");
+
+  const updatedPost = await Blogs.findByIdAndUpdate(
+    blog._id,
+    { ...blog, date: new Date() },
+    {
+      new: true,
+    }
+  );
+  res.status(200).json(updatedPost);
+};
+
+// Delete Blog
+export const deleteBlog = async (req, res) => {
+  const { id } = req.body;
+  // const post = req.body;
+  if (!req.userId) return res.status(404).json({ message: "Unauthorized!" });
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send("No blog with that id");
+
+  await Blogs.findByIdAndRemove(id);
+
+  res.status(200).json({ message: "Blog deleted successfully!" });
 };

@@ -1,7 +1,7 @@
 // import mongoose from "mongoose";
 import Category from "../models/category.model.js";
 
-// Create
+// Create New Category
 export const createCategory = async (req, res) => {
   const { categoryName } = req.body;
 
@@ -20,7 +20,7 @@ export const createCategory = async (req, res) => {
   }
 };
 
-// Get
+// Get All Categories
 export const getCategories = async (req, res) => {
   try {
     const categories = await Category.find();

@@ -5,7 +5,6 @@ import { createCategory, getCategories } from "../controllers/category.js";
 const router = express.Router();
 
 router.post("/create-category", verify, createCategory);
-router.get("/get-categories", verify, getCategories);
-// router.post("/signup", signup);
+router.get("/get-categories", getCategories);
 
 export default router;

@@ -1,15 +1,24 @@
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const bodyParser = require("body-parser");
 
-const MONGODB_URL = `mongodb+srv://Rohi:Gamer_13@cluster0.nistphz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+import express from "express";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import cors from "cors";
+
+import userRoutes from "./routes/users.routes.js";
+import blogRoutes from "./routes/blogs.routes.js";
+import categoryRoutes from "./routes/category.routes.js";
 
 const app = express();
+dotenv.config();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/blogs", blogRoutes);
+app.use("/api/v1/category", categoryRoutes);
 
 // mongoose.connect()
 app.get("/", (req, res) => {
@@ -19,7 +28,7 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 5172;
 
 mongoose
-  .connect(MONGODB_URL)
+  .connect(process.env.MONGODB_URL)
   .then(() => app.listen(PORT, () => console.log("running on localhost:5172")))
   .catch((error) => console.log("error: ", error.message));
 

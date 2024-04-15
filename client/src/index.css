@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #222222;
+  background-color: #fff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,3 +16,142 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h2 {
+    @apply text-2xl text-gray-800 m-0 font-bold;
+  }
+  h3 {
+    @apply text-lg text-gray-800 m-0 font-semibold;
+  }
+  p {
+    @apply text-base text-gray-800 m-0;
+  }
+  button {
+    @apply outline-none w-20 text-center border-0 bg-slate-800 text-white text-base cursor-pointer h-12 rounded;
+  }
+  header {
+    @apply flex w-full justify-between items-center h-16 bg-slate-800;
+  }
+  nav {
+    @apply max-w-7xl px-5 mx-auto flex w-full justify-between items-center;
+  }
+  input {
+    @apply outline-none border border-solid rounded border-gray-800 text-gray-800 bg-white px-2 text-base h-10;
+  }
+}
+
+.logo {
+  @apply text-white cursor-pointer !important;
+}
+
+.alt-btn {
+  @apply text-gray-800 bg-white !important;
+}
+
+.main {
+  @apply w-full max-w-7xl mx-auto flex items-center justify-between flex-wrap px-6;
+}
+
+.textInput {
+  @apply flex w-1/4 max-w-7xl justify-start items-start flex-col mt-5 mb-5 min-w-72;
+}
+
+.textInput > input {
+  @apply w-full !important;
+}
+
+.input-placeholder {
+  @apply mb-1 font-semibold;
+}
+
+.categoryDropdown {
+  @apply block w-1/4 min-w-72;
+}
+
+.title {
+  @apply mb-1 font-semibold !important;
+}
+
+.selectDropdown {
+  @apply outline-none relative border border-solid rounded border-gray-800 text-gray-800 bg-white px-2 text-base h-10;
+}
+
+.selectDropdown > label {
+  @apply mb-1 font-normal absolute top-2;
+}
+
+.dropdown {
+  @apply top-10 absolute hidden bg-transparent border border-gray-800 rounded border-solid py-2 px-1 w-full right-0.5;
+}
+
+.dropdown > p {
+  @apply w-full p-2 hover:bg-slate-400 hover:text-white rounded;
+}
+
+.dropdown.active {
+  @apply block !important;
+}
+
+.blogs {
+  @apply w-full max-w-7xl mx-auto flex items-center flex-col justify-between flex-wrap px-6 mt-5 mb-8;
+}
+
+.blogs > .head {
+  @apply w-full flex items-center justify-between bg-gray-800 rounded h-16 px-2 mb-5;
+}
+
+.blogs > .head > a > .alt-btn {
+  @apply w-52 h-12 !important;
+}
+
+.blogs > .head > h2 {
+  @apply text-white !important;
+}
+
+.blogs > .body {
+  @apply w-full flex items-stretch flex-wrap gap-5;
+}
+
+.blogs > .body > .card {
+  @apply w-full max-w-96 flex flex-col items-start justify-start gap-2 border border-gray-800 rounded border-solid p-2;
+}
+
+.blogs > .body > .card > .btns {
+  @apply w-full flex justify-between items-center gap-4;
+}
+
+.blogs > .body > .card > .btns > a,
+.blogs > .body > .card > .btns > button {
+  @apply w-6/12;
+}
+
+.blogs > .body > .card > .btns > a > button,
+.blogs > .body > .card > a,
+.blogs > .body > .card > a > button {
+  @apply w-full;
+}
+
+form {
+  @apply w-full max-w-7xl mx-auto flex items-center flex-col justify-between flex-wrap px-6 mt-5;
+}
+
+form > .file  > input {
+  @apply border-0 w-72 !important;
+}
+
+form > .file, form > .categoryDropdown {
+  @apply my-5;
+}
+
+.login > button {
+  @apply min-w-72 !important;
+}
+
+.login > .tab{
+  @apply min-w-72 flex items-center justify-end mt-4;
+}
+
+.login > .tab > button{
+  @apply min-w-72 !important;
+}

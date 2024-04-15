@@ -97,7 +97,7 @@ const Login = () => {
         </>
       )}
       <button>Submit</button>
-      <div>
+      <div className="tab">
         {label === "Sign In" ? (
           <button onClick={() => setLabel("Sign Up")}>
             Click here to Sign Up

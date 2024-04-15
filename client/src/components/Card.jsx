@@ -11,15 +11,19 @@ const Card = ({ value, categoryData, handleDelete }) => {
       <h3>{value.author?.name}</h3>
       <p>{value.content}</p>
       {profile.role && profile.role === "Admin" && (
-        <Link
-          to="/blog-form"
-          state={{ label: "update", blog: value, categoryData: categoryData }}
-        >
-          <button>{"update"}</button>
-        </Link>
-      )}
-      {profile.role && profile.role === "Admin" && (
-        <button onClick={() => handleDelete(value._id)}>delete</button>
+        <div className="btns">
+          <Link
+            to="/blog-form"
+            state={{
+              label: "update",
+              blog: value,
+              categoryData: categoryData,
+            }}
+          >
+            <button>{"update"}</button>
+          </Link>
+          <button onClick={() => handleDelete(value._id)}>delete</button>
+        </div>
       )}
       <Link to="/blog-detail" state={{ id: value._id }}>
         <button>Know More</button>

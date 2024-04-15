@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import "./App.css";
-import Header from "./components/Header";
 import Input from "./components/Input";
 import SelectCategory from "./components/SelectCategory";
 import { ProfileContext } from "./Routes";
@@ -86,36 +85,41 @@ function App() {
 
   return (
     <>
-      <Header />
-      <Input
-        value={search}
-        handleChange={handleChange}
-        label={"Search"}
-        name={"search"}
-      />
       <div className="main">
+        <Input
+          value={search}
+          handleChange={handleChange}
+          label={"Search"}
+          name={"search"}
+        />
         <SelectCategory
           label={"Categories"}
+          value={selectedCategory}
           handleSelect={(doc) => setSelectedCategory(doc.categoryName)}
           data={categoryData}
         />
-        <div className="blogs">
-          <div className="head">
-            <h2>Blogs</h2>
-            {profile.role && profile.role === "Admin" && (
-              <Link
-                to="/blog-form"
-                state={{ label: "create", categoryData: categoryData }}
-              >
-                <button>{"Add New Blog"}</button>
-              </Link>
-            )}
-          </div>
-          <div className="body">
-            {data?.map((doc) => (
-              <Card key={doc._id} value={doc} categoryData={categoryData} handleDelete={handleDelete} />
-            ))}
-          </div>
+      </div>
+      <div className="blogs">
+        <div className="head">
+          <h2>Blogs</h2>
+          {profile.role && profile.role === "Admin" && (
+            <Link
+              to="/blog-form"
+              state={{ label: "create", categoryData: categoryData }}
+            >
+              <button className="alt-btn">{"Add New Blog"}</button>
+            </Link>
+          )}
+        </div>
+        <div className="body">
+          {data?.map((doc) => (
+            <Card
+              key={doc._id}
+              value={doc}
+              categoryData={categoryData}
+              handleDelete={handleDelete}
+            />
+          ))}
         </div>
       </div>
     </>

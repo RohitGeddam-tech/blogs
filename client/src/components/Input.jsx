@@ -1,8 +1,21 @@
 import React from "react";
 
-const Input = ({ error, value, label, name, disabled, handleChange, type="text" }) => {
+const Input = ({
+  error,
+  value,
+  label,
+  name,
+  disabled,
+  handleChange,
+  type = "text",
+}) => {
   return (
     <div className={`textInput`}>
+      {label !== "" && (
+        <label htmlFor={name} className="input-placeholder">
+          {label}
+        </label>
+      )}
       <input
         type={type}
         aria-label={name}
@@ -12,11 +25,6 @@ const Input = ({ error, value, label, name, disabled, handleChange, type="text" 
         onChange={handleChange}
         disabled={disabled}
       />
-      {label !== "" && (
-        <label htmlFor={name} className="input-placeholder">
-          {label}
-        </label>
-      )}
       {error && error !== "" ? <p className="error-text">{error}</p> : null}
     </div>
   );

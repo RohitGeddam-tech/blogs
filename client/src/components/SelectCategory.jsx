@@ -22,6 +22,7 @@ const SelectCategory = ({
   handleSelect,
   data,
   disabled = false,
+  value,
 }) => {
   const [dropdown, setDropdown] = useState(false);
   const [close, setClose] = useState(false);
@@ -37,7 +38,8 @@ const SelectCategory = ({
   }, [close]);
 
   return (
-    <>
+    <div className="categoryDropdown">
+      <p className="title">Catgeory</p>
       <div
         className={`selectDropdown`}
         ref={wrapperRef}
@@ -45,7 +47,7 @@ const SelectCategory = ({
           if (!disabled) setDropdown(true);
         }}
       >
-        <label>{label}</label>
+        <label>{value}</label>
         {/* <img src={arrowDown} alt="arrow-down" /> */}
         <div
           className={`dropdown ${dropdown && data?.length > 0 ? "active" : ""}`}
@@ -66,7 +68,7 @@ const SelectCategory = ({
       {error && error !== "" ? (
         <p className="selectDropdown-error-text">{error}</p>
       ) : null}
-    </>
+    </div>
   );
 };
 

@@ -7,21 +7,26 @@ const Header = () => {
 
   return (
     <header>
-      <h2>My Blogs</h2>
-      {!profile?.name ? (
-        <Link to="/signin">
-          <button>{"Signin"}</button>
+      <nav>
+        <Link to="/">
+          <h2 className="logo">My Blogs</h2>
         </Link>
-      ) : (
-        <button
-          onClick={() => {
-            localStorage.removeItem("user");
-            setProfile({});
-          }}
-        >
-          {"Signout"}
-        </button>
-      )}
+        {!profile?.name ? (
+          <Link to="/signin">
+            <button className="alt-btn">{"Signin"}</button>
+          </Link>
+        ) : (
+          <button
+            className="alt-btn"
+            onClick={() => {
+              localStorage.removeItem("user");
+              setProfile({});
+            }}
+          >
+            {"Signout"}
+          </button>
+        )}
+      </nav>
     </header>
   );
 };

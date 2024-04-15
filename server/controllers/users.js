@@ -14,7 +14,7 @@ export const signin = async (req, res) => {
     if (!confirm)
       return res.status(401).json({ message: "Password is incorrect." });
 
-    const token = jwt.sign({ id: exist._id, email: exist.email }, "test", {
+    const token = jwt.sign({ id: exist._id, email: exist.email }, process.env.SECRET_KEY , {
       expiresIn: "1h",
     });
 
@@ -39,7 +39,7 @@ export const signup = async (req, res) => {
       name,
     });
 
-    const token = jwt.sign({ id: result._id, email: result.email }, "test", {
+    const token = jwt.sign({ id: result._id, email: result.email }, process.env.SECRET_KEY , {
       expiresIn: "1h",
     });
 

@@ -13,8 +13,8 @@ const app = express();
 dotenv.config();
 
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/blogs", blogRoutes);

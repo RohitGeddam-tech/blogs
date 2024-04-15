@@ -15,7 +15,7 @@ export const createBlog = async (req, res) => {
 
   try {
     await newBody.save();
-    res.status(201).json(body);
+    res.status(201).json({ data: body, message: "Blog Created Successfully" });
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
@@ -49,17 +49,18 @@ export const getBlogs = async (req, res) => {
 
 // Get Single Blog
 export const getBlogDetails = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
 
+  const blogId = id.replace(":", "");
   try {
-    const blog = await Blogs.findById(id)
+    const blog = await Blogs.findById(blogId)
       .populate("author", "name")
       .populate({
         path: "comments",
         populate: {
-            path: 'author',
-            select: 'name'
-          }
+          path: "author",
+          select: "name",
+        },
       });
 
     res.status(200).json({
@@ -87,7 +88,9 @@ export const updateBlog = async (req, res) => {
       new: true,
     }
   );
-  res.status(200).json(updatedPost);
+  res
+    .status(200)
+    .json({ data: updatedPost, message: "Blog Updated Successfully" });
 };
 
 // Delete Blog
@@ -96,18 +99,18 @@ export const deleteBlog = async (req, res) => {
   // const post = req.body;
   if (!req.userId) return res.status(404).json({ message: "Unauthorized!" });
 
-  const blog = await Blogs.findById(id);
-  if (!blog) return res.status(404).send("Blog not found!");
+  const deletedBlog = await Blogs.findByIdAndDelete(id);
 
-  await Blogs.findByIdAndRemove(id);
+  if (!deletedBlog) {
+    return res.status(404).json({ message: "Blog not found" });
+  }
 
   res.status(200).json({ message: "Blog deleted successfully!" });
 };
 
 // Add New Comment
 export const addComment = async (req, res) => {
-  const { data } = req.body;
-  //   console.log(comment);
+  const data  = req.body;
 
   if (!req.userId) return res.status(404).json({ message: "Unauthorized!" });
 
@@ -129,7 +132,7 @@ export const addComment = async (req, res) => {
     } else {
       blog.comments.push(newComment);
     }
-    
+
     await blog.save();
 
     res.status(200).json({

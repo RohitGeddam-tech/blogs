@@ -19,30 +19,35 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios({
-      method: "post",
-      url: `http://localhost:5172/api/v1/user/${
-        label === "Sign In" ? "signin" : "signup"
-      }`,
-      data: {
-        ...userData,
-      },
-    })
-      .then((res) => {
-        if (res.data) {
-          localStorage.setItem(
-            "user",
-            JSON.stringify({
-              ...res.data.result,
-              token: res.data.token,
-            })
-          );
-          window.location.href = "/";
-        }
+    if (email === "" || password === "") {
+      alert("please enter a valid Email and Password");
+    } else {
+      axios({
+        method: "post",
+        url: `http://localhost:5172/api/v1/user/${
+          label === "Sign In" ? "signin" : "signup"
+        }`,
+        data: {
+          ...userData,
+        },
       })
-      .catch((err) => {
-        err.message && alert(err.message);
-      });
+        .then((res) => {
+          if (res.data) {
+            localStorage.setItem(
+              "user",
+              JSON.stringify({
+                ...res.data.result,
+                token: res.data.token,
+              })
+            );
+            window.location.href = "/";
+          }
+        })
+        .catch((err) => {
+          err.message && alert(err.message);
+        });
+    }
+
     // console.log(userData, label);
   };
 

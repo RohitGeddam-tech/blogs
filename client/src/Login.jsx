@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Input from "./components/Input";
-import { ProfileContext } from "./Routes";
 import axios from "axios";
 
 const initialValues = {
@@ -10,8 +9,6 @@ const initialValues = {
 };
 
 const Login = () => {
-  const { setProfile } = useContext(ProfileContext);
-
   const [label, setLabel] = useState("Sign In");
 
   const [userData, setUserData] = useState(initialValues);
@@ -33,7 +30,6 @@ const Login = () => {
     })
       .then((res) => {
         if (res.data) {
-          setProfile({ ...res.data.result, token: res.data.token });
           localStorage.setItem(
             "user",
             JSON.stringify({
@@ -99,11 +95,11 @@ const Login = () => {
       <button>Submit</button>
       <div className="tab">
         {label === "Sign In" ? (
-          <button onClick={() => setLabel("Sign Up")}>
+          <button type="button" onClick={() => setLabel("Sign Up")}>
             Click here to Sign Up
           </button>
         ) : (
-          <button onClick={() => setLabel("Sign In")}>
+          <button type="button" onClick={() => setLabel("Sign In")}>
             Click here to Sign In
           </button>
         )}

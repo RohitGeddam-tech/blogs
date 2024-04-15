@@ -59,30 +59,36 @@ const BlogDetail = () => {
 
   return (
     <div className="detail">
-      <img src={blogDetail.image} alt={blogDetail.title} />
-      <h2>{blogDetail.title}</h2>
-      <h3>{blogDetail.author?.name}</h3>
-      <p>{blogDetail.content}</p>
-      {blogDetail.comments?.length > 0 && <h3>Comments</h3>}
-      {blogDetail.comments?.length > 0 &&
-        blogDetail.comments?.map((doc) => (
+      <div className="flexbox">
+        <img src={blogDetail.image} alt={blogDetail.title} />
+        <div className="right">
+          <h2>{blogDetail.title}</h2>
+          <h3>{blogDetail.author?.name}</h3>
+          <p>{blogDetail.content}</p>
+        </div>
+      </div>
+      <div className="comments">
+        {blogDetail.comments?.length > 0 && <h3>Comments</h3>}
+        {blogDetail.comments?.length > 0 &&
+          blogDetail.comments?.map((doc) => (
+            <div className="comment">
+              <p>{doc.comment}</p>
+              <p>Author - {doc.author.name}</p>
+            </div>
+          ))}
+        {blogDetail.title && (
           <>
-            <p>{doc.comment}</p>
-            <p>{doc.author.name}</p>
+            <textarea
+              name="comment"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              cols="30"
+              rows="10"
+            />
+            <button onClick={handleSubmit}>Add new comment</button>
           </>
-        ))}
-      {blogDetail.title && (
-        <>
-          <textarea
-            name="comment"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            cols="30"
-            rows="10"
-          />
-          <button onClick={handleSubmit}>Add new comment</button>
-        </>
-      )}
+        )}
+      </div>
     </div>
   );
 };

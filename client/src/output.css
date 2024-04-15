@@ -543,6 +543,25 @@ input {
   outline-offset: 2px;
 }
 
+textarea {
+  height: 6rem;
+  border-radius: 0.25rem;
+  border-width: 1px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgb(31 41 55 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity));
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -869,12 +888,13 @@ form {
   padding-right: 1.5rem;
 }
 
-form > .file  > input {
+form > .file > input {
   width: 18rem !important;
   border-width: 0px !important;
 }
 
-form > .file, form > .categoryDropdown {
+form > .file,
+form > .categoryDropdown {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
 }
@@ -893,4 +913,106 @@ form > .file, form > .categoryDropdown {
 
 .login > .tab > button {
   min-width: 18rem !important;
+}
+
+.loading {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  line-height: 1;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+
+.detail {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  width: 100%;
+  max-width: 80rem;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.detail > .flexbox {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.detail > .flexbox > img {
+  width: 33.333333%;
+  min-width: 20rem;
+}
+
+@media (min-width: 768px) {
+  .detail > .flexbox > img {
+    width: 100%;
+  }
+}
+
+.detail > .comments {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.detail > .comments > .comment {
+  width: 100%;
+  max-width: 18rem;
+  border-radius: 0.25rem;
+  border-width: 1px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgb(107 114 128 / var(--tw-border-opacity));
+  padding: 0.5rem;
+}
+
+.detail > .comments > textarea,
+.detail > .comments > button {
+  min-width: 18rem;
+}
+
+@media (max-width: 768px) {
+  .detail > .flexbox > img {
+    width: 100% !important;
+  }
+
+  .detail > .comments > .comment {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .detail > .comments > textarea,
+  .detail > .comments > button {
+    width: 100% !important;
+  }
+
+  .textInput,
+  .categoryDropdown {
+    width: 100% !important;
+  }
+
+  .blogs > .body > .card {
+    width: 100% !important;
+    max-width: 560px !important;
+  }
 }

@@ -24,7 +24,7 @@ const Login = () => {
     } else {
       axios({
         method: "post",
-        url: `http://localhost:5172/api/v1/user/${
+        url: `${import.meta.env.VITE_URL}api/v1/user/${
           label === "Sign In" ? "signin" : "signup"
         }`,
         data: {

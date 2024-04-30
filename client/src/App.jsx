@@ -18,7 +18,7 @@ function App() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5172/api/v1/blogs/get-blogs?title=${search}&category=${selectedCategory}`
+        `${import.meta.env.VITE_URL}api/v1/blogs/get-blogs?title=${search}&category=${selectedCategory}`
       );
       // console.log(response)
       if (response.status !== 200) return alert("Something went wrong!");
@@ -31,7 +31,7 @@ function App() {
   const fetchCategory = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5172/api/v1/category/get-categories`
+        `${import.meta.env.VITE_URL}api/v1/category/get-categories`
       );
       // console.log(response)
       if (response.status !== 200) return alert("Something went wrong!");
@@ -66,7 +66,7 @@ function App() {
   const handleDelete = (id) => {
     axios({
       method: "post",
-      url: `http://localhost:5172/api/v1/blogs/delete-blog`,
+      url: `${import.meta.env.VITE_URL}api/v1/blogs/delete-blog`,
       data: {
         id: id,
       },

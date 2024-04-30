@@ -15,7 +15,7 @@ const BlogDetail = () => {
     try {
       const response = await axios({
         method: "get",
-        url: `http://localhost:5172/api/v1/blogs/get-blogs:${location.state.id}`,
+        url: `${import.meta.env.VITE_URL}api/v1/blogs/get-blogs:${location.state.id}`,
       });
       // console.log(response)
       if (response.status !== 200) return alert("Something went wrong!");
@@ -36,7 +36,7 @@ const BlogDetail = () => {
     // const data = label === "create" ? {...blogData, image:}
     axios({
       method: "post",
-      url: `http://localhost:5172/api/v1/blogs/add-comment`,
+      url: `${import.meta.env.VITE_URL}api/v1/blogs/add-comment`,
       data: {
         comment: comment,
         author: profile._id,

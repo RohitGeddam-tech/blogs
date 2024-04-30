@@ -32,7 +32,7 @@ const BlogForm = () => {
     // const data = label === "create" ? {...blogData, image:}
     axios({
       method: "post",
-      url: `http://localhost:5172/api/v1/blogs/${
+      url: `${import.meta.env.VITE_URL}api/v1/blogs/${
         label === "create" ? "create-blog" : "update-blog"
       }`,
       data: blogData,
